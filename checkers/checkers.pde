@@ -1,8 +1,10 @@
 Checkers game;
 
 void setup() {
-  int x_size = 800;
+  // Run tests  
+  TestAI.test();
   
+  int x_size = 800;  
   game = new Checkers(2,0);
   game.make_board(8, x_size);
 
