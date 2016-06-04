@@ -75,7 +75,7 @@ class Checkers {
         y_pos = temp_y_pos;
         
         if (temp_is_occupied == 1 || temp_is_occupied == 0){
-          occupant = new Piece(0, temp_is_occupied, 50);
+          occupant = new Piece(temp_is_occupied, 0);
           is_occupied = 1;
         }
         else{
