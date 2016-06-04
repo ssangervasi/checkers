@@ -10,6 +10,8 @@ class Piece {
     }
     
     void draw_piece(int x_pos, int y_pos, float space_size) {
+      fill(255, 200,133);
+      ellipse((x_pos*space_size) + (space_size/2), (y_pos * space_size) + (space_size/2),2*space_size/3, 2*space_size/3);
       
     }
     
