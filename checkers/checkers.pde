@@ -1,11 +1,11 @@
-Checkers game;
+CheckersGame game;
 
 void setup() {
   // Run tests  
   TestAI.test();
   
   int x_size = 800;  
-  game = new Checkers(2,0);
+  game = new CheckersGame(2,0);
   game.make_board(8, x_size);
 
   
@@ -15,7 +15,7 @@ void setup() {
 void draw() {
   background(0);
   game.board.draw_board();
-  game.board.hover_over(mouseX,mouseY);
+  game.board.hover_over(mouseX,mouseY); 
   
 }
 
