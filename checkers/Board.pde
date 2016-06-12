@@ -1,5 +1,5 @@
 
-public class Board {
+class Board {
   Space[][] board;
   Space src;
   Space dest;
@@ -15,34 +15,29 @@ public class Board {
    space_size = side_size/ num_squares;
    board = new Space[num_squares][num_squares];
  
-   for (int x = 0; x < num_squares; x += 1){
-     for (int y = 0; y < num_squares; y += 1){
-       if (y == 0 || y == 1){
+   for (int x = 0; x < num_squares; x += 1) {
+     for (int y = 0; y < num_squares; y += 1) {
+       if (y == 0 || y == 1) {
          board[x][y] = new Space(x,y,0); 
-       }
-       else if (y == num_squares - 1  || y == num_squares - 2 ){
+       } else if (y == num_squares - 1  || y == num_squares - 2 ) {
          board[x][y] = new Space(x,y,1); 
-       }
-       else{
+       } else{
          board[x][y] = new Space(x,y,2);   
        }
      }
    }  
   }
  
-  void draw_board(){
-    for (int x = 0; x < num_squares; x += 1){
-      for (int y = 0; y < num_squares; y += 1){
-        if(board[x][y].is_selected == 1){
+  void draw_board() {
+    for (int x = 0; x < num_squares; x += 1) {
+      for (int y = 0; y < num_squares; y += 1) {
+        if(board[x][y].is_selected == 1) {
           fill(217,11,35);  
-        }
-        else if (board[x][y].is_hovered == 1){
+        } else if (board[x][y].is_hovered == 1) {
           fill(131,131,131);
-        }
-        else if ((x % 2 == 0 && y % 2 == 0) || (x % 2 == 1 && y % 2 == 1)){
+        } else if ((x % 2 == 0 && y % 2 == 0) || (x % 2 == 1 && y % 2 == 1)) {
           fill(0,0,0);
-        }
-        else{
+        } else{
           fill(255,255,255);
         }
         rect(x*space_size,y*space_size,space_size,space_size);
@@ -54,50 +49,45 @@ public class Board {
     }
   }
   
-  int select_space(int x, int y, int turn){
+  int select_space(int x, int y, int turn) {
     int end_turn = 0;
-    if(board[x][y].is_selected == 1){
+    if(board[x][y].is_selected == 1) {
       board[x][y].is_selected = 0;
       board[x][y].occupant.is_selected = 0;
-      if (src == board[x][y]){
+      if (src == board[x][y]) {
         src.is_selected = 0;
         src.occupant.is_selected = 0;
         src = null;  
-        if (dest != null){
+        if (dest != null) {
           dest.is_selected = 0;
           dest = null;  
         }
-      }
-      else if(dest == board[x][y]){
+      } else if(dest == board[x][y]) {
         dest.is_selected = 0;
         dest = null;  
       }  
-    }
-    else {
-      if (src == null && dest == null){
-        if (board[x][y].is_occupied == 1 && (board[x][y].occupant.owner % 2 == turn % 2)){
+    } else {
+      if (src == null && dest == null) {
+        if (board[x][y].is_occupied == 1 && (board[x][y].occupant.owner % 2 == turn % 2)) {
           board[x][y].select_space();
           src = board[x][y];
         }
-      }
-      else if (src != null && dest == null){
-        if(board[x][y].is_occupied == 0){
+      } else if (src != null && dest == null) {
+        if(board[x][y].is_occupied == 0) {
           board[x][y].select_space();
           temp_dest = board[x][y];
           int is_valid = check_move();
           if (is_valid == 1) {
             dest = temp_dest;
             end_turn = 1;
-          }
-          else{
+          } else{
             temp_dest.is_selected = 0;
           } 
           temp_dest = null ;
         }
-      }
-      else{
+      } else{
         clear_selections();
-        if(board[x][y].is_occupied == 1 && (board[x][y].occupant.owner % 2 == turn % 2)){
+        if(board[x][y].is_occupied == 1 && (board[x][y].occupant.owner % 2 == turn % 2)) {
           board[x][y].select_space();
           src = board[x][y];
         }
@@ -106,21 +96,22 @@ public class Board {
     return end_turn;
   }
   
-  void clear_selections(){
-    if (src != null){
+  void clear_selections() {
+    if (src != null) {
       src.is_selected = 0;
       src.occupant.is_selected = 0;
       src = null;
     }
-   if (dest != null){
-     dest.is_selected = 0;
-     dest = null; 
-   } 
+    
+    if (dest != null) {
+      dest.is_selected = 0;
+      dest = null; 
+    } 
     
   }
   
-  void hover_over(float x, float y){
-    if (hovered != null){
+  void hover_over(float x, float y) {
+    if (hovered != null) {
       hovered.is_hovered = 0;
       hovered = null;
     }
@@ -131,7 +122,7 @@ public class Board {
     hovered = new_hovered;
   }
   
-  int[] get_space(float x_pos, float y_pos){
+  int[] get_space(float x_pos, float y_pos) {
     int[] new_space = new int [2];
     int x_coord;
     int y_coord;
@@ -142,36 +133,6 @@ public class Board {
     new_space[0] = x_coord;
     new_space[1] = y_coord;
     return new_space; 
+  
   }
-
-  public class Space {
-    int x_pos;
-    int y_pos;
-    int is_occupied;
-    int is_selected;
-    int is_hovered;
-    Piece occupant;
-
-    Space(int temp_x_pos, int temp_y_pos, int temp_is_occupied) {
-      x_pos = temp_x_pos;
-      y_pos = temp_y_pos;
-      is_selected = 0;
-      
-      if (temp_is_occupied == 1 || temp_is_occupied == 0){
-        occupant = new Piece(temp_is_occupied, 0);
-        is_occupied = 1;
-      }
-      else{
-        is_occupied = 0;  
-      }
-    }
-    
-    void select_space(){
-      is_selected = 1;
-      if (is_occupied == 1){
-        occupant.select_piece();
-      }    
-    }
-  }
-
 }

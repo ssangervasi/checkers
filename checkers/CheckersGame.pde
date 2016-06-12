@@ -11,7 +11,7 @@ class CheckersGame {
     turn_clock = 0;
   }
   
-  void make_board(int temp_num_squares, int temp_side_size){
+  void make_board(int temp_num_squares, int temp_side_size) {
     // Sets up the initial game state by:
     // Making a board
     // Creating the initial pieces

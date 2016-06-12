@@ -3,6 +3,9 @@
 	[
 		{
 			"path": "."
+		},
+		{
+			"path": "B:\\Documents\\GitHub\\dev-tools"
 		}
 	]
 }

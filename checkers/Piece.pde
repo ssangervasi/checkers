@@ -11,13 +11,11 @@ class Piece {
     }
     
     void draw_piece(int x_pos, int y_pos, float space_size) {
-      if(is_selected == 1){
+      if(is_selected == 1) {
         fill(11,14,217);  
-      }
-      else if (owner == 0){
+      } else if (owner == 0) {
       fill(133, 33,108);
-      }
-      else{
+      } else{
         fill(57, 189,21); 
       }
       noStroke();
@@ -25,7 +23,7 @@ class Piece {
       
     }
     
-    void select_piece(){
+    void select_piece() {
       is_selected = 1;  
     }
     

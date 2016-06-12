@@ -20,19 +20,19 @@ void draw() {
 }
 
 
-void mouseClicked(){
+void mouseClicked() {
   int[] selected = new int[2];
   int turn_end = 0;
   selected = game.board.get_space(mouseX, mouseY);
   
   turn_end = game.board.select_space(selected[0],selected[1], game.turn_clock);
-  if (turn_end == 1){
+  if (turn_end == 1) {
     game.turn_clock += 1;
     game.board.clear_selections();  
   }
 }
 
-int check_move(){
+int check_move() {
   int is_valid = 0;
   int[] src_coords = new int [2];
   int[] dest_coords = new int [2];
@@ -44,8 +44,8 @@ int check_move(){
   dest_coords[0] = game.board.temp_dest.x_pos;
   dest_coords[1] = game.board.temp_dest.y_pos;
   
-  if (src_king == 1 || (src_owner == 0 && dest_coords[1] - src_coords[1] >= 1) || (src_owner == 1 && dest_coords[1] - src_coords[1] <= 1)){
-    if (abs(src_coords[0] - dest_coords[0]) == 1){
+  if (src_king == 1 || (src_owner == 0 && dest_coords[1] - src_coords[1] >= 1) || (src_owner == 1 && dest_coords[1] - src_coords[1] <= 1)) {
+    if (abs(src_coords[0] - dest_coords[0]) == 1) {
       is_valid = 1;
     }  
   }
