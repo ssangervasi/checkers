@@ -1,56 +1,53 @@
 CheckersGame game;
 
 void setup() {
-  // Run tests  
-  TestAI.test();
-  
-  int x_size = 800;  
+  int xSize = 800;  
   game = new CheckersGame(2,0);
-  game.make_board(8, x_size);
+  game.makeBoard(8, xSize);
 
   
-  size(x_size,x_size);
+  size(xSize,xSize);
 }
 
 void draw() {
   background(0);
-  game.board.draw_board();
-  game.board.hover_over(mouseX,mouseY); 
+  game.board.drawBoard();
+  game.board.hoverOver(mouseX,mouseY); 
   
 }
 
 
 void mouseClicked() {
   int[] selected = new int[2];
-  int turn_end = 0;
-  selected = game.board.get_space(mouseX, mouseY);
+  int turnEnd = 0;
+  selected = game.board.getSpace(mouseX, mouseY);
   
-  turn_end = game.board.select_space(selected[0],selected[1], game.turn_clock);
-  if (turn_end == 1) {
-    game.turn_clock += 1;
-    game.board.clear_selections();  
+  turnEnd = game.board.selectSpace(selected[0],selected[1], game.turnClock);
+  if (turnEnd == 1) {
+    game.turnClock += 1;
+    game.board.clearSelections();  
   }
 }
 
-int check_move() {
-  int is_valid = 0;
-  int[] src_coords = new int [2];
-  int[] dest_coords = new int [2];
-  int src_owner = game.board.src.occupant.owner;
-  int src_king = game.board.src.occupant.is_king;
+boolean checkMove() {
+  boolean isValid = false;
+  int[] srcCoords = new int [2];
+  int[] destCoords = new int [2];
+  int srcOwner = game.board.src.occupant.owner;
+  boolean isSourceKing = game.board.src.occupant.isKing;
   
-  src_coords[0] = game.board.src.x_pos;
-  src_coords[1] = game.board.src.y_pos;
-  dest_coords[0] = game.board.temp_dest.x_pos;
-  dest_coords[1] = game.board.temp_dest.y_pos;
+  srcCoords[0] = game.board.src.xPos;
+  srcCoords[1] = game.board.src.yPos;
+  destCoords[0] = game.board.dest.xPos;
+  destCoords[1] = game.board.dest.yPos;
   
-  if (src_king == 1 || (src_owner == 0 && dest_coords[1] - src_coords[1] >= 1) || (src_owner == 1 && dest_coords[1] - src_coords[1] <= 1)) {
-    if (abs(src_coords[0] - dest_coords[0]) == 1) {
-      is_valid = 1;
+  if (isSourceKing || (srcOwner == 0 && destCoords[1] - srcCoords[1] >= 1) || (srcOwner == 1 && destCoords[1] - srcCoords[1] <= 1)) {
+    if (abs(srcCoords[0] - destCoords[0]) == 1) {
+      isValid = true;
     }  
   }
   
   
-  return is_valid;
+  return isValid;
   
 }
